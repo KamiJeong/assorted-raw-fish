@@ -7,7 +7,7 @@ Next.js App Router, TypeScript, Tailwind CSS, lucide-react, Recharts로 구현�
 Node.js 22.13 이상과 npm이 필요합니다.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -61,4 +61,6 @@ npm run test:e2e
 - 운영 빌드, TypeScript 검사, ESLint 검사, 데이터 로직 테스트 5개 통과.
 - Chromium 브라우저 테스트 8개 모두 통과: CRUD와 대시보드 연동, 저장 유지·복구, 설정·초기화, 모달 키보드 동작, 모바일 메뉴·가로 넘침 검사.
 - 이 실행 환경에서는 서버 시작 전 연결 확인이 대기할 수 있어, `npm run start -- --hostname 127.0.0.1 --port 3110`으로 서버를 먼저 시작한 뒤 `PLAYWRIGHT_PORT=3110 npm run test:e2e -- --workers=2`로 검증했습니다.
-- 패키지 레지스트리 제한으로 설치된 로컬 패키지 캐시를 활용했습니다. 깨끗한 의존성 설치와 lockfile 생성은 검증하지 못했습니다(`npm EALLOWREMOTE`: 선택적 `@tailwindcss/oxide-wasm32-wasi` 다운로드 거부). 일반 환경에서 위 `npm install`로 설치하세요.
+- `package-lock.json`을 추가했고 별도 작업 디렉터리에서 깨끗한 설치를 검증했습니다. 이 로컬 환경의 npm 12에서는 선택적 레지스트리 tarball 때문에 `npm ci --allow-remote=all`이 필요했습니다. 일반 CI는 Node 24의 npm으로 `npm ci`를 사용합니다.
+- Next.js와 eslint-config-next는 16.3.6으로 업데이트했으며 npm audit 결과 취약점 0건입니다.
+- GitHub Actions에서 lint, 타입 검사, 단위 테스트, 빌드, Chromium E2E를 수행합니다.

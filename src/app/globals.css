@@ -188,3 +188,18 @@ fieldset { min-inline-size:0; }
 @media(max-width:767px) { .header { min-height:68px; } }
 
 @media(max-width:360px) { .settings-body > .grid { grid-template-columns:1fr; } }
+
+/* A brief floating illustration settles after 4.8 seconds. */
+.not-found { min-height:calc(100dvh - 210px); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:32px 0; gap:16px; }
+.not-found-art { position:relative; width:200px; height:180px; max-width:100%; display:grid; place-items:center; color:var(--accent); }
+.not-found-orbit { position:absolute; width:164px; height:164px; border-radius:50%; background:var(--accent-soft); }
+.not-found-document { position:relative; width:100px; height:120px; display:grid; place-items:center; border:1px solid var(--border); border-radius:18px; background:var(--surface); transform:rotate(-8deg); animation:not-found-float 2.4s ease-in-out 2; }
+.not-found-document svg { width:64px; height:64px; }
+.not-found-spark { position:absolute; width:10px; height:10px; border-radius:50%; background:var(--accent); }
+.not-found-spark-one { top:30px; right:20px; }
+.not-found-spark-two { bottom:28px; left:22px; width:6px; height:6px; }
+.not-found-code { color:var(--accent); font-size:0.875rem; font-weight:700; letter-spacing:.16em; }
+.not-found h1 { font-size:clamp(1.5rem, 3vw, 2rem); overflow-wrap:anywhere; }
+.not-found-description { color:var(--muted); font-size:0.875rem; line-height:1.8; }
+.not-found .button { margin-top:8px; white-space:normal; }
+@keyframes not-found-float { 0%,100% { transform:translateY(0) rotate(-8deg); } 50% { transform:translateY(-12px) rotate(4deg); } }

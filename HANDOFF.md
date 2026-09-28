@@ -1,5 +1,19 @@
 # ASS-6 리뷰 인계
 
+## ASS-8 추가 인계: 500 오류 화면
+
+- `app/error.tsx`와 `app/global-error.tsx`에서 한국어 500 안내와 재시도·대시보드 이동 제공.
+- 독립 SVG 서버/수리 그림에 부유·렌치·표시등 애니메이션 적용. 현재 404에는 그림이 없으며, 기존 워크스페이스의 색상과 선형 스타일을 사용함.
+- Next 16.3 `retry`로 서버 내용을 다시 요청. 최상위 오류 화면은 provider 없이 렌더링하며 자체 CSS와 OS 다크 모드 지원. 일반 오류 화면은 워크스페이스 테마 사용.
+- 320px 대응, 모션 감소 지원, 오류 내부 메시지 비노출.
+- 검증: lint, typecheck, unit 5개, production build, 기존 Chromium E2E 15개 통과. E2E는 운영 서버를 3119 포트에 먼저 실행한 뒤 `PLAYWRIGHT_PORT=3119 npm run test:e2e -- --workers=2`로 실행.
+- `npm run test:errors` 통과: 임시 복사 앱에서 실제 페이지/루트 서버 오류, 재시도 복구, 홈 이동, 404 분리, 320/1440px 양 테마, 모션 감소 확인. 임시 앱은 자동 삭제하며 테스트 오류 유발 경로를 제품에 포함하지 않음. CI에도 추가.
+- 데스크톱·모바일 캡처 확인. `test-results/500-*.png`는 로컬 검증 산출물이며 커밋 제외.
+- App Router 오류 경계 적용 범위이며, 스트리밍이 시작된 요청의 HTTP 상태 코드를 강제로 바꾸거나 프록시/API 오류 응답을 대체하지 않음.
+- 관리형 인계 결과와 PR 링크는 ASS-8 Codex Workpad에 기록. 병합·배포는 하지 않음.
+
+---
+
 기존 ASS-5 대시보드 구현을 이어서 Product Design 관점의 검토 및 수정을 완료했습니다. 상세 발견 사항·대비 수치·범위는 [DESIGN_REVIEW.md](DESIGN_REVIEW.md)를 참고하세요.
 
 ## 변경
